@@ -1,0 +1,68 @@
+
+<html>
+    <head>
+        <!-- the content of this tag is what appears as the name of the webpage
+        that loads on the browser
+        -->
+        <title>Tokenize</title>
+        <!--this is where javascript starts-->
+        <script>
+           //
+           //getting and processing the file value.
+            function Show_Tokens(){
+                      //
+                      //set the myinput variable same as the input tag
+                      let my_input = document.getElementById('MyInput');
+                      //
+                      //getting the file value.
+                      var fileinput = my_input.files[0];
+                      //
+                      //create an instance of the read file.
+                      var reader = new FileReader();
+                      //
+                      //once onload the file is processed.
+                      reader.onload = function(event){
+                          //
+                          //this is the text string read from the selected file.
+                          let $text = event.target.result;
+                          
+                          //here str is my variable placeholder for $text
+                          const str = $text;
+                          //herein is a regular expressin to match word 
+                          //characters in the string.
+                          const reg = /\w+/g;
+                          //this is a while loop with a condition that returns 
+                          //a null result if $text is empty.
+                          while((match = reg.exec(str)) !== null){
+                              //
+                              //get the matched string name
+                              const $name = match[0];
+                              //
+                              //get the position of the matched string name
+                              const $pos = match.index;
+                              //
+                              //
+                             const result = {name:$name, pos:$pos};
+                              //
+                              console.log(result);
+                          }
+                      };
+                      //
+                      //request for the file.
+                      reader.readAsText(fileinput);
+                    }
+          
+        </script>
+    </head>
+    <!-- this tag defines the start of the webpage content -->
+    <body>
+        <!--this show my id input which is of type file. -->
+        <input id="MyInput" type="file"/>
+     
+        <!-- here a button is created to serve the Onclick function--> 
+        <button onclick="Show_Tokens()">Show the tokens</button>
+        
+            
+        
+    </body>
+</html>
